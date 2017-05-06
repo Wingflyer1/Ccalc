@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %} C-Calc -> {{ title }}
+{% endblock title %}
+{% block head %}
+
+{% endblock head %}
+
+
+
+{% block body %}
+<div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1" align="center">
+    <div class="panel panel-default" style="display:none;">
+        <div class="panel-heading">
+          <div class="panel-title"><h1> {{ title }} </h1></div>
+        </div>
+        <div class="panel-body">
+            
+            
+            
+                <h3> Incomes | Expenses </h3>
+                <div class="col-sm-12">
+                <div class="col-sm-6">
+                  <table class="table table-bordered table-condensed">
+                    <thead>
+                      <tr>
+                        <th>What</th>
+                        <th>Amount</th>
+                        {% if income %}<th></th> {% endif %}
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for income in incomes %}
+                      <tr style="color:green;">
+                      
+                        <td>
+                          <a href="{% url 'VoyageCalc:edit-income' income.id %}?from={{ request.path|urlencode }}">
+                          {{ income.income_type }}
+                          </a>
+                        </td>
+                      
+                        <td>{{ income.income_nok|floatformat:"0" }}</td>
+                        <td>
+                          <a href="{% url 'VoyageCalc:delete-income' income.id %}?from={{ request.path|urlencode }}">
+                            <span class="glyphicon glyphicon-remove" aria-hidden=true style="color:red;"></span> <span class=glyphicon-class></span>
+                          </a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    <tr>
+                    <td>Total Inc.</td><td> {{ voyage.voyage_incomes|floatformat:"0" }} </td>
+                    </tr>
+                    <tr>
+                    <td colspan="2">Add income  <a href="{% url 'VoyageCalc:add_income' voyage.id %}?from={{ request.path|urlencode }}"><span class="glyphicon glyphicon-plus" style="color:green;"></span></a></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  </div>
+
+
+                  <div class="col-sm-6">
+                    <table class="table table-bordered table-condensed">
+                    <thead>
+                      <tr>
+                        <th>What</th>
+                        <th>Amount</th>
+                        {% if costs %}<th></th>{% endif %}
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for cost in costs %}
+                      <tr style="color:red;">
+                      
+                        <td><a href="{% url 'VoyageCalc:edit-cost' cost.id %}?from={{ request.path|urlencode }}">{{ cost.cost_type }}</a></td>
+                      
+                        <td>{{ cost.cost_nok }}</td>
+                        <td>
+                          <a href="{% url 'VoyageCalc:delete-cost' cost.id %}?from={{ request.path|urlencode }}">
+                            <span class="glyphicon glyphicon-remove" aria-hidden=true style="color:red;"></span> <span class=glyphicon-class></span>
+                          </a>
+                        </td>
+                      </tr>
+
+                    {% endfor %}
+                    <tr style="color:red;"><td>Bunkers</td><td>{{ voyage.bunkers|floatformat:"0" }}</td></tr>
+                    <tr style="color:red;"><td>Commission</td><td>{{ voyage.commission|floatformat:"0" }}</td></tr>
+                    <tr>
+                    <td>Add Exp.</td><td><a href="{% url 'VoyageCalc:add_cost' voyage.id %}?from={{ request.path|urlencode }}"><span class="glyphicon glyphicon-minus" style="color:red;"></span></a></td>
+                    </tr>
+                    <tr>
+                    <td>Total Exp.</td><td> {{ voyage.voyage_costs|floatformat:"0" }} </td>
+                    </tr>
+                    </tbody>
+                  </table>                 
+                  </div>
+
+
+                  <div class="col-sm-12" style="text-align:center;">
+                           <p style="font-size:25px; font-weight: bold; color:{{ voyage.color_net }};"> Net Freight: {{ voyage.net_freight|floatformat:"0" }}</p>
+                  </div>
+                  </div>
+
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Voyage Data</button>
+<!--   <div id="demo" class="collapse">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </div> -->
+
+
+<div id="demo" class="collapse">
+                <form class="vertical" role="form" method="POST" action="" enctype="multipart/form-data">
+                  {% csrf_token %}
+                {{form|crispy}}
+                <hr>
+                </div>            
+                <hr>
+                <input type = submit class="btn btn-success" style="width:100%;" value="{{ sub_btn }}" />
+                </form>
+</div>
+        </div>          
+      </div>
+</div>
+
+{% block footer %}
+{% endblock footer %}
+{% endblock body %}

@@ -1,0 +1,51 @@
+body{
+    background-color: #435a61;
+    padding-top: 50px;
+    
+}
+
+a {
+	color:orange;
+}
+
+ h1 {
+ 	text-shadow: 1px 2px #001100;
+ }
+
+td {
+	font-weight:bold;
+}
+
+footer {
+position: fixed;
+height: 100px;
+bottom: 0;
+width: 100%;
+}
+
+.navbar{
+    border-radius:0;
+}
+
+.control-group{
+	column-span:100%;
+}
+
+#red {
+	color:red;
+}
+
+#hint_id_username, #hint_id_password2 {
+	color:white;
+}
+
+#table-back {
+	background-color: #394b50;
+	color:black;
+}
+
+#table-back {
+	background-color: ##7ab1bd;
+	color:#4a95b7;
+	border-radius: 10px;
+}

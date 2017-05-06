@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block title %} Vessel list {% endblock title %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+    {% if user.is_authenticated %}
+
+        <div id="table-back" class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1" >
+                
+                <h1> List of Vessels <a href="{% url 'VoyageCalc:create_vessel' %}"><h4>(Add a vessel)</a></h4></h1>
+
+                
+                <table class="table table-striped table-inverse">
+                    <thead>
+                        <tr>
+                            <th>Vessel</th>
+                            <th>Telephone</th>
+                            <th>Usage:<br> Lad / Ball (IFO / MGO)</th>
+                            <th>Fuel Price:<br> MGO / IFO</th>
+                            <th>Comment</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for object in object_list %}
+                        
+                            <tr>
+                                <td><a href="{% url 'VoyageCalc:edit-vessel' object.id %}">{{ object.vessel_name }}</a></td>
+                                <th>{{ object.telephone }}</th>
+                                <th>{{ object.cons_lad }} / {{ object.cons_bal }} ({{ object.cons_por_mgo }} / {{ object.cons_por_ifo }})</th>
+                                <th> {{ object.bunker_price_mgo }} / {{ object.bunker_price_ifo}}</th>
+                                <td>{{ object.comment|truncatechars:23 }}</td>
+                            </tr>
+                          
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+        </div>
+        {% else %}
+        {% include "VoyageCalc/home.html" %}
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock body %}

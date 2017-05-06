@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block title %} CartenCalc
+{% endblock title %}
+
+
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+
+        <div id="home" class="col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1" style="color:white; text-align:center;display:none;">
+                <h1 > {{ title }} </h1>
+                <h6 style="color:aqua">({{version}})</h6>
+               
+            {% if pic_num == 1 %}
+             <img src="{%  static 'img/1.jpg' %}" class="img-circle img-responsive center-block" alt="Cinque Terre" width="auto" height="100%" >
+
+             {% elif pic_num == 2 %}
+             <img src="{%  static 'img/2.jpg' %}" class="img-circle img-responsive center-block" alt="Cinque Terre" width="auto" height="100%" >
+
+             {% elif pic_num == 3 %}
+             <img src="{%  static 'img/3.jpg' %}" class="img-circle img-responsive center-block" alt="Cinque Terre" width="auto" height="100%" >
+             {% endif %}
+
+            {% if user.is_authenticated %}
+            <p><h5 style="text-align: center;color:grey;">Welcome {{ user }}, please use the top menu to continue.</h5></p>
+            {% else %}  
+            <p><h3 style="text-align: center;"> Please log in <!--(or register) -->to continue</h3></p>
+            {% endif %}
+    </div>
+    </div>
+</div>
+{% endblock body %}

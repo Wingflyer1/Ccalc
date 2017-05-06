@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %} C-Calc -> {{ title }}
+{% endblock title %}
+{% block head %}
+
+{% endblock head %}
+
+
+
+{% block body %}
+
+<div class="col-sm-4 col-sm-offset-4" align="center">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title"><h1> {{ title }} </h1></div>
+        </div>
+        <div class="panel-body">
+            
+                        <form class="vertical" role="form" method="POST" action="{% if came_from_page %}?next={{ came_from_page }}{% endif %}" enctype="multipart/form-data">
+                        
+                            {% csrf_token %}
+                            {{form|crispy}}
+                            
+                            <input type = submit class="btn btn-success" style="width:100%;" value="{{ sub_btn }}" />
+                            
+                        </form>
+
+        </div>          
+      </div>
+}
+</div>
+
+{% block footer %}
+{% endblock footer %}
+{% endblock body %}
