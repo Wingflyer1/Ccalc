@@ -55,12 +55,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'carten.urls'
+ROOT_URLCONF = 'django_project.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(os.path.dirname(BASE_DIR)), "carten/templates"],
+        'DIRS': [os.path.join(os.path.dirname(BASE_DIR)), "django_project/templates"],
         
 
         'APP_DIRS': True,
@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'carten.wsgi.application'
+WSGI_APPLICATION = 'django_project.wsgi.application'
 
 
 # Database
